@@ -1,4 +1,3 @@
-// Load boards from file or manually
 const easy = [
     "6------7------5-2------1---362----81--96-----71--9-4-5-2---651---78----345-------",
     "685329174971485326234761859362574981549618732718293465823946517197852643456137298"
@@ -12,24 +11,18 @@ const hard = [
     "712583694639714258845269173521436987367928415498175326184697532253841769976352841"
 ];
 
-// Decalring Variables
+// Declare Variable
 var timer;
 var timeRemaining;
 var lives;
 var selectedNum;
 var selectedTile;
 var disableSelect;
-id("start-btn").addEventListener("click", function() {
-    console.log('Hello');
-});
+
 window.onload = function () {
-    alert('Hi');
-    
-    // Run startgame function when button is clicked 
+    // Run startGame function when button is clicked
     id("start-btn").addEventListener("click", startGame);
-    console.log("Hello");
-    alert('Hi');
-    // Add event listener to each number in number container
+
     for ( let i = 0; i < id("number-container").children.length; i++) {
         id("number-container").children[i].addEventListener("click", function() {
             // If selecting is not disable
@@ -55,38 +48,38 @@ window.onload = function () {
 }
 
 function startGame() {
-
-    // Choose board difficulty
+    // Choose Difficulty
     let board;
-    if (id("diff-1").checked) board = easy[0];
-    else if (id("diff-2").checked) board = medium[0];
-    else board = hard[0];
-
-    // Set lives to 3 and enable selecting numbers and tiles
-    lives = 3;
+    if (id("diff-1").checked) {
+        board = easy[0];
+        lives = 8;
+    } else if (id("diff-2").checked) {
+        board = medium[0];
+        lives = 5;
+    } else {
+        board = hard[0];
+        lives = 3;
+    }
     disableSelect = false;
-    id("lives").textContent = "Lives Remaining = " + lives;
+    id("lives").textContent = "Lives Remaining : " + lives;
 
-    // Creates board based on difficulty
+    // Creates board based on dificulty
     generateBoard(board);
-
-    // Starts the timer 
     startTimer();
 
-    // Sets theme based on input
-    if(id("theme-1").checked) {
+    if (id("theme-1").checked) {
         qs("body").classList.remove("dark");
     } else {
         qs("body").classList.add("dark");
     }
 
-    // Show number container
+    // Display the number container
     id("number-container").classList.remove("hidden");
+
 }
 
 function startTimer() {
-    // Set time remaining based on input
-    if(id("time-1").checked) timeRemaining = 180;
+    if (id("time-1").checked) timeRemaining = 180;
     else if (id("time-2").checked) timeRemaining = 300;
     else timeRemaining = 600;
 
@@ -110,8 +103,9 @@ function timeConversion(time) {
     return minutes + ":" + seconds;
 }
 
+
 function generateBoard(board) {
-    // Clear previous board 
+    // Clear previous board
     clearPrevious();
 
     // Let used to increment tile ids
@@ -128,17 +122,17 @@ function generateBoard(board) {
             tile.textContent = board.charAt(i);
         } else {
             // Add click event listener to tile
-            tile.addEventListener("click", function() {
+            tile.addEventListener("click", function () {
                 // If selecting is not disabled
-                if(!disableSelect) {
+                if (!disableSelect) {
                     // If the tile is already selected
-                    if(tile.classList.contains("selected")) {
+                    if (tile.classList.contains("selected")) {
                         // Then remove the selection
                         tile.classList.remove("selected");
                         selectedTile = null;
                     } else {
                         // Deselect all other tiles
-                        for(let i = 0; i < 81; i++) {
+                        for (let i = 0; i < 81; i++) {
                             qsa(".tile")[i].classList.remove("selected");
                         }
                         // Add selection and update variable
@@ -171,15 +165,18 @@ function updateMove() {
     if(selectedTile && selectedNum) {
         // Set the tile to the correct number
         selectedTile.textContent = selectedNum.textContent;
+
         // If the number matches the corresponding number in the solution key
-        if(checkCorrect(selectedtile)) {
+        if(checkCorrect(selectedTile)) {
             // Deselect the tile
             selectedTile.classList.remove("selected");
             selectedNum.classList.remove("selected");
-
+            
             // Clear the selected variables
             selectedNum = null;
             selectedTile = null;
+            
+
 
             // Check if board is completed
             if(checkDone()) {
@@ -190,11 +187,17 @@ function updateMove() {
             // Disable selecting new numbers for one second
             disableSelect = true;
             // Make the tile turn red
-            selectedTile.classList.add("incorrect");
+            selectedTile.classList.add("incorrect");            
+            selectedTile.classList.remove("selected");
+            selectedNum.classList.remove("selected");
+
+                
+            
             //Run in one Sec
             setTimeout(function() {
                 // Subtract lives by 1
                 lives--;
+                selectedTile.textContent = "";
                 // If no lives left -> end game
                 if (lives === 0) {endGame();}
                 else {
@@ -241,41 +244,39 @@ function endGame() {
 function checkCorrect(tile) {
     // Set solution based on difficulty selection
     let solution;
-    if (id("diff-1").checked) solution = easy[1];
-    else if (id("diff-2").checked) solution = medium[1];
-    else solution = hard[1];
+    if (id("diff-1").checked) {solution = easy[1];}
+    else if (id("diff-2").checked){ solution = medium[1];}
+    else {solution = hard[1];}
 
     // If tiles number is = to solution number
-    if (solution.charAt(title.id) === tile.textContent) return true;
-    else return false;
+    if (solution.charAt(tile.id) === tile.textContent) {
+        return true;
+    } else {
+     return false;
+    }
 }
 
-// Delete any previous number on the board 
 function clearPrevious() {
-    // Access all of the tiles
+    // Clear the tiles
     let tiles = qsa(".tile");
-
-    // Remove each tile
     for (let i = 0; i < tiles.length; i++) {
         tiles[i].remove();
     }
 
-    // If there is a timer clear it
-    if(timer) clearTimeout(timer);
+    // Clear the timer
+    if (timer) clearTimeout(timer);
 
     // Deselect any numbers
     for (let i = 0; i < id("number-container").children.length; i++) {
         id("number-container").children[i].classList.remove("selected");
     }
 
-    // Clear selected variables
+    // Clear selected Variables
     selectedTile = null;
     selectedNum = null;
 }
 
-
-// Helper functions
-// This function gets any element id once calling it
+// Helper Function
 function id(id) {
     return document.getElementById(id);
 }
