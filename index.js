@@ -19,12 +19,16 @@ var lives;
 var selectedNum;
 var selectedTile;
 var disableSelect;
-
+id("start-btn").addEventListener("click", function() {
+    console.log('Hello');
+});
 window.onload = function () {
+    alert('Hi');
     
     // Run startgame function when button is clicked 
     id("start-btn").addEventListener("click", startGame);
     console.log("Hello");
+    alert('Hi');
     // Add event listener to each number in number container
     for ( let i = 0; i < id("number-container").children.length; i++) {
         id("number-container").children[i].addEventListener("click", function() {
