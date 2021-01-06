@@ -102,11 +102,11 @@
   }
   
   p.selected {
-    background-color: rgb(228, 119, 18);
+    background-color: tomato;
   }
   
   p.incorrect {
-    color: tomato;
+    color: red;
   }
   
   .rightBorder {
