@@ -3,7 +3,7 @@ const easy = [
     "685329174971485326234761859362574981549618732718293465823946517197852643456137298"
 ];
 const medium = [
-    "--9-------4----6-758-31----15--4-36-------4-8----9-------75----3-------1--2--3--",
+    "--9-------4----6-758-31----15--4-36-------4-8----9-------75----3-------1--2--3---",
     "619472583243985617587316924158247369926531478734698152891754236365829741472163895"
 ];
 const hard = [
@@ -25,6 +25,11 @@ var clickSound = new Audio();
 clickSound.src= "click.mp3";
 var numberSound = new Audio();
 numberSound.src="number.mp3";
+var winSound = new Audio();
+winSound.src= "win.mp3";
+var loseSound = new Audio();
+loseSound.src= "lose.mp3";
+
 
 window.onload = function () {
     // Run startGame function when button is clicked
@@ -244,14 +249,16 @@ function endGame() {
     // Display win or loss message
     if (lives === 0 || timeRemaining === 0) {
         id("loseModal").style.display = "block";
+        loseSound.play();
         setTimeout(function () {
             location.reload();
-        }, 2000)
+        }, 5000)
     } else {
         id("winModal").style.display = "block";
+        winSound.play();
         setTimeout(function () {
             location.reload();
-        }, 2000)
+        }, 5000)
     }
 }
 
