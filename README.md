@@ -20,7 +20,7 @@ The languages we used are : HTML, CSS & JAVASCRIPT  only
 When you enter the website you can find sone settings you need to choose before clicking that 'Start Game' button
 
 * The Difficulty (Easy, Normal, Hard)
-* Time (3, 5, 0 Minutes)
+* Time (3, 5, 10 Minutes)
 * Theme (Light, Dark)
 
 After choosing the setting you want to play with, all what you have to do is hit that Create New Game Button or Start Game Button.
