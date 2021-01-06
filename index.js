@@ -19,6 +19,11 @@ var selectedNum;
 var selectedTile;
 var disableSelect;
 
+var clickSound = new Audio();
+clickSound.src= "click.mp3";
+var numberSound = new Audio();
+numberSound.src="number.mp3";
+
 window.onload = function () {
     // Run startGame function when button is clicked
     id("start-btn").addEventListener("click", startGame);
