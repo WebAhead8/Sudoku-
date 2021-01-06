@@ -1,130 +1,161 @@
 .hidden {
-    display: none;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  body.dark {
-    background-color: #333333;
-    color: white;
-  }
-  
-  header {
-    text-align: center;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgb(27, 26, 26);
-    background-color: #333333;
-    color: tomato;
-  }
-  
-  h1 {
-    font-size: 45pt;
-    margin-top: 0;
-    padding-top: 0;
-  }
-  button {
-    padding: 15px 25px;
-    font-size: 25px;
-    background-color: tomato;
-    border: 0;
-    color: white;
-    margin-bottom: 50px;
-  }
-  button:hover {
-    padding: 20px 30px;
-    border: 5px solid white;
-    cursor: pointer;
-    margin-bottom: 30px;
-  }
-  
-  #setup-game {
-    display: flex;
-    justify-content: center;
-  }
-  
-  #setup-game > * {
-    margin-bottom: 10px;
-    padding-left: 50px;
-    padding-right: 50px;
-    display: flex;
-    align-items: center;
-  }
-  
-  button {
-    justify-self: center;
-  }
-  
-  p#timer,
-  p#lives {
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  #game {
-    display: flex;
-    justify-content: center;
-  }
-  
-  #number-container > p {
-    border: 1px solid black;
-    border-radius: 20%;
-    width: 60px;
-    height: 60px;
-    font-size: 40pt;
-    margin-left: 50px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    text-align: center;
-  }
-  
-  #board {
-    padding-top: 10px;
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
-    width: 600px;
-    height: 600px;
-  }
-  
-  .tile {
-    border: 1px solid black;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    margin: 0px;
-    vertical-align: middle;
-    font-size: 40pt;
-  }
-  
-  p.selected {
-    background-color: rgb(228, 119, 18);
-  }
-  
-  p.incorrect {
-    color: red;
-  }
-  
-  .rightBorder {
-    border-right: 4px solid black;
-  }
-  
-  .bottomBorder {
-    border-bottom: 4px solid black;
-  }
-  
-  footer {
-    background-color: #333333;
-    text-align: center;
-    bottom: 0;
-    color: white;
-    position: relative;
-  }
-  
-  #ftr {
-      padding: 25px;
-  }
+
+  display: none;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body.dark {
+  background-color: #333333;
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(27, 26, 26);
+  background-color: #333333;
+  color: tomato;
+}
+
+h1 {
+  font-size: 45pt;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom: 2px solid tomato;
+}
+
+h3 {
+  font-size: 25px;
+  padding: 10px;
+  border: 3px solid tomato;
+  border-radius: 14px;
+}
+button {
+  padding: 15px 25px;
+  font-size: 25px;
+  background-color: tomato;
+  border: 0;
+  color: white;
+  margin-bottom: 50px;
+}
+button:hover {
+  padding: 20px 30px;
+  border: 5px solid white;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+#setup-game {
+  display: flex;
+  justify-content: center;
+}
+
+#setup-game > * {
+  margin-bottom: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  display: flex;
+  align-items: center;
+}
+
+button {
+  justify-self: center;
+}
+
+p#timer,
+p#lives {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  background-color:#333333;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#game {
+  display: flex;
+  justify-content: center;
+}
+
+#number-container > p {
+  border: 1px solid black;
+  border-radius: 20%;
+  width: 60px;
+  height: 60px;
+  font-size: 40pt;
+  margin-left: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+#board {
+  padding-top: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  width: 600px;
+  height: 600px;
+}
+
+.tile {
+  border: 1px solid black;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  margin: 0px;
+  vertical-align: middle;
+  font-size: 40pt;
+}
+
+p.selected {
+  background-color: tomato;
+}
+
+p.incorrect {
+  color: red;
+}
+
+.rightBorder {
+  border-right: 4px solid black;
+}
+
+.bottomBorder {
+  border-bottom: 4px solid black;
+}
+
+footer {
+  background-color: #333333;
+  text-align: center;
+  bottom: 0;
+  color: white;
+  position: relative;
+  font-size: 22px;
+}
+
+#ftr {
+  padding: 25px;
+}
+
+label {
+  font-size: 25px;
+  padding: 10px;
+}
+

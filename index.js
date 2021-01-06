@@ -84,13 +84,13 @@ function startTimer() {
     else timeRemaining = 600;
 
     // Sets timer for first second
-    id("timer").textContent = timeConversion(timeRemaining);
+    id("timer").textContent = "Time Remaining : " + timeConversion(timeRemaining);
     //Sets timer to update every second
     timer = setInterval(function () {
         timeRemaining--;
         // If no time remaining end game
         if(timeRemaining === 0) endGame();
-        id("timer").textContent = timeConversion(timeRemaining);
+        id("timer").textContent = "Time Remaining : " + timeConversion(timeRemaining);
     }, 1000)
 }
 
