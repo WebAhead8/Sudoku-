@@ -168,6 +168,7 @@ function generateBoard(board) {
 }
 
 function updateMove() {
+
     // If a tile and a number is selected
     if (selectedTile && selectedNum) {
         // Set the tile to the correct number
@@ -224,7 +225,7 @@ function updateMove() {
                 selectedNum = null;
             }, 1000);
         }
-    }
+    } 
 }
 
 function checkDone() {
