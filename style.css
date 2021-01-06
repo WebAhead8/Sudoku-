@@ -1,4 +1,5 @@
 .hidden {
+
   display: none;
 }
 body {
@@ -125,7 +126,7 @@ p#lives {
 }
 
 p.selected {
-  background-color: rgb(228, 119, 18);
+  background-color: tomato;
 }
 
 p.incorrect {
