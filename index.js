@@ -61,6 +61,11 @@ var clickSound = new Audio();
 clickSound.src= "click.mp3";
 var numberSound = new Audio();
 numberSound.src="number.mp3";
+var winSound = new Audio();
+winSound.src= "win.mp3";
+var loseSound = new Audio();
+loseSound.src= "lose.mp3";
+
 
 window.onload = function () {
     // Run startGame function when button is clicked
@@ -210,6 +215,7 @@ function generateBoard(board) {
 }
 
 function updateMove() {
+
     // If a tile and a number is selected
     if (selectedTile && selectedNum) {
         // Set the tile to the correct number
@@ -266,7 +272,7 @@ function updateMove() {
                 selectedNum = null;
             }, 1000);
         }
-    }
+    } 
 }
 
 function checkDone() {
@@ -285,14 +291,16 @@ function endGame() {
     // Display win or loss message
     if (lives === 0 || timeRemaining === 0) {
         id("loseModal").style.display = "block";
+        loseSound.play();
         setTimeout(function () {
             location.reload();
-        }, 2000)
+        }, 5000)
     } else {
         id("winModal").style.display = "block";
+        winSound.play();
         setTimeout(function () {
             location.reload();
-        }, 2000)
+        }, 5000)
     }
 }
 
