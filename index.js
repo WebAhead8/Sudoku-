@@ -18,31 +18,33 @@ var lives;
 var selectedNum;
 var selectedTile;
 var disableSelect;
+var winModel = id("winModal");
+var lostModel = id("loseModal");
 
 window.onload = function () {
     // Run startGame function when button is clicked
     id("start-btn").addEventListener("click", startGame);
 
-    for ( let i = 0; i < id("number-container").children.length; i++) {
-        id("number-container").children[i].addEventListener("click", function() {
+    for (let i = 0; i < id("number-container").children.length; i++) {
+        id("number-container").children[i].addEventListener("click", function () {
             // If selecting is not disable
-            if(!disableSelect) {
-            // If number is already selected
-            if(this.classList.contains("selected")) {
-                // Then remove selection
-                this.classList.remove("selected");
-                selectedNum = null;
-            } else {
-                // Deselect all other numbers
-                for (let i = 0; i < 9; i++) {
-                    id("number-container").children[i].classList.remove("selected");
+            if (!disableSelect) {
+                // If number is already selected
+                if (this.classList.contains("selected")) {
+                    // Then remove selection
+                    this.classList.remove("selected");
+                    selectedNum = null;
+                } else {
+                    // Deselect all other numbers
+                    for (let i = 0; i < 9; i++) {
+                        id("number-container").children[i].classList.remove("selected");
+                    }
+                    // Select it and update selecNum variable
+                    this.classList.add("selected");
+                    selectedNum = this;
+                    updateMove();
                 }
-                // Select it and update selecNum variable
-                this.classList.add("selected");
-                selectedNum = this;
-                updateMove();
             }
-          }
         });
     }
 }
@@ -89,17 +91,17 @@ function startTimer() {
     timer = setInterval(function () {
         timeRemaining--;
         // If no time remaining end game
-        if(timeRemaining === 0) endGame();
+        if (timeRemaining === 0) endGame();
         id("timer").textContent = "Time Remaining : " + timeConversion(timeRemaining);
     }, 1000)
 }
 
 // Converts seconds into string of MM:SS format
 function timeConversion(time) {
-    let minutes = Math.floor(time/60);
-    if(minutes < 10) minutes = "0" + minutes;
+    let minutes = Math.floor(time / 60);
+    if (minutes < 10) minutes = "0" + minutes;
     let seconds = time % 60;
-    if(seconds < 10) seconds = "0" + seconds;
+    if (seconds < 10) seconds = "0" + seconds;
     return minutes + ":" + seconds;
 }
 
@@ -162,24 +164,24 @@ function generateBoard(board) {
 
 function updateMove() {
     // If a tile and a number is selected
-    if(selectedTile && selectedNum) {
+    if (selectedTile && selectedNum) {
         // Set the tile to the correct number
         selectedTile.textContent = selectedNum.textContent;
 
         // If the number matches the corresponding number in the solution key
-        if(checkCorrect(selectedTile)) {
+        if (checkCorrect(selectedTile)) {
             // Deselect the tile
             selectedTile.classList.remove("selected");
             selectedNum.classList.remove("selected");
-            
+
             // Clear the selected variables
             selectedNum = null;
             selectedTile = null;
-            
+
 
 
             // Check if board is completed
-            if(checkDone()) {
+            if (checkDone()) {
                 endGame();
             }
             // If the number does not match the solution key
@@ -187,19 +189,19 @@ function updateMove() {
             // Disable selecting new numbers for one second
             disableSelect = true;
             // Make the tile turn red
-            selectedTile.classList.add("incorrect");            
+            selectedTile.classList.add("incorrect");
             selectedTile.classList.remove("selected");
             selectedNum.classList.remove("selected");
 
-                
-            
+
+
             //Run in one Sec
-            setTimeout(function() {
+            setTimeout(function () {
                 // Subtract lives by 1
                 lives--;
                 selectedTile.textContent = "";
                 // If no lives left -> end game
-                if (lives === 0) {endGame();}
+                if (lives === 0) { endGame(); }
                 else {
                     //If not = 0 -> update lives text
                     id("lives").textContent = "Lives Remaining : " + lives;
@@ -223,8 +225,8 @@ function updateMove() {
 function checkDone() {
     let tiles = qsa(".tile");
     for (let i = 0; i < tiles.length; i++) {
-        if(tiles[i].textContent === "") return false;
-    } 
+        if (tiles[i].textContent === "") return false;
+    }
     return true;
 }
 
@@ -235,24 +237,30 @@ function endGame() {
 
     // Display win or loss message
     if (lives === 0 || timeRemaining === 0) {
-        id("lives").textContent = "You Lost!";
+        id("loseModal").style.display = "block";
+        setTimeout(function () {
+            location.reload();
+        }, 2000)
     } else {
-        id("lives").textContent = "You Won!";
+        id("winModal").style.display = "block";
+        setTimeout(function () {
+            location.reload();
+        }, 2000)
     }
 }
 
 function checkCorrect(tile) {
     // Set solution based on difficulty selection
     let solution;
-    if (id("diff-1").checked) {solution = easy[1];}
-    else if (id("diff-2").checked){ solution = medium[1];}
-    else {solution = hard[1];}
+    if (id("diff-1").checked) { solution = easy[1]; }
+    else if (id("diff-2").checked) { solution = medium[1]; }
+    else { solution = hard[1]; }
 
     // If tiles number is = to solution number
     if (solution.charAt(tile.id) === tile.textContent) {
         return true;
     } else {
-     return false;
+        return false;
     }
 }
 
