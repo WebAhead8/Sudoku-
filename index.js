@@ -13,13 +13,13 @@ var mediumTable;
 var hardTable;
 
 var clickSound = new Audio();
-clickSound.src= "click.mp3";
+clickSound.src= "sounds/click.mp3";
 var numberSound = new Audio();
-numberSound.src="number.mp3";
+numberSound.src="sounds/number.mp3";
 var winSound = new Audio();
-winSound.src= "win.mp3";
+winSound.src= "sounds/win.mp3";
 var loseSound = new Audio();
-loseSound.src= "lose.mp3";
+loseSound.src= "sounds/lose.mp3";
 
 
 window.onload = function () {

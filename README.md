@@ -17,7 +17,7 @@ The languages we used are : HTML, CSS & JAVASCRIPT  only
 
 ## How To Play 
 
-When you enter the website you can find sone settings you need to choose before clicking that 'Start Game' button
+When you enter the website you can find some settings you need to choose before clicking that 'Start Game' button
 
 * The Difficulty (Easy, Normal, Hard)
 * Time (3, 5, 10 Minutes)
