@@ -75,13 +75,7 @@ function startGame() {
     // Creates board based on dificulty
     generateBoard(board);
     startTimer();
-/*
-    if (getId("theme-1").checked) {
-        getQs("body").classList.remove("dark");
-    } else {
-        getQs("body").classList.add("dark");
-    }
-*/
+
     // Display the number container
     getId("number-container").classList.remove("hidden");
 
