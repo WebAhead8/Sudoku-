@@ -6,8 +6,8 @@ var lives;
 var selectedNum;
 var selectedTile;
 var disableSelect;
-var winModel = id("winModal");
-var lostModel = id("loseModal");
+var winModel = getId("winModal");
+var lostModel = getId("loseModal");
 var easyTable;
 var mediumTable;
 var hardTable;
@@ -24,10 +24,10 @@ loseSound.src= "sounds/lose.mp3";
 
 window.onload = function () {
     // Run startGame function when button is clicked
-    id("start-btn").addEventListener("click", startGame);
+    getId("start-btn").addEventListener("click", startGame);
 
-    for (let i = 0; i < id("number-container").children.length; i++) {
-        id("number-container").children[i].addEventListener("click", function () {
+    for (let i = 0; i < getId("number-container").children.length; i++) {
+        getId("number-container").children[i].addEventListener("click", function () {
             // If selecting is not disable
             if (!disableSelect) {
                 // If number is already selected
@@ -38,7 +38,7 @@ window.onload = function () {
                 } else {
                     // Deselect all other numbers
                     for (let i = 0; i < 9; i++) {
-                        id("number-container").children[i].classList.remove("selected");
+                        getId("number-container").children[i].classList.remove("selected");
                     }
                     // Select it and update selecNum variable
                     this.classList.add("selected");
@@ -53,11 +53,11 @@ window.onload = function () {
 function startGame() {
     // Choose Difficulty
     let board;
-    if (id("diff-1").checked) {
+    if (getId("diff-1").checked) {
         easyTable = Math.floor(Math.random()*3);  
         board = easy[easyTable][0];
         lives = 8;
-    } else if (id("diff-2").checked) {
+    } else if (getId("diff-2").checked) {
         mediumTable = Math.floor(Math.random()*3);  
         board = medium[mediumTable][0];
         lives = 5;
@@ -70,36 +70,44 @@ function startGame() {
         lives = 3;
     }
     disableSelect = false;
-    id("lives").textContent = "Lives Remaining : " + lives;
+    getId("lives").textContent = "Lives Remaining : " + lives;
 
     // Creates board based on dificulty
     generateBoard(board);
     startTimer();
-
-    if (id("theme-1").checked) {
-        qs("body").classList.remove("dark");
+/*
+    if (getId("theme-1").checked) {
+        getQs("body").classList.remove("dark");
     } else {
-        qs("body").classList.add("dark");
+        getQs("body").classList.add("dark");
     }
-
+*/
     // Display the number container
-    id("number-container").classList.remove("hidden");
+    getId("number-container").classList.remove("hidden");
 
 }
 
+function switchTheme() {
+    if (getId("theme-1").checked) {
+        getQs("body").classList.remove("dark");
+    } else {
+        getQs("body").classList.add("dark");
+    }
+}
+
 function startTimer() {
-    if (id("time-1").checked) timeRemaining = 180;
-    else if (id("time-2").checked) timeRemaining = 300;
+    if (getId("time-1").checked) timeRemaining = 180;
+    else if (getId("time-2").checked) timeRemaining = 300;
     else timeRemaining = 600;
 
     // Sets timer for first second
-    id("timer").textContent = "Time Remaining : " + timeConversion(timeRemaining);
+    getId("timer").textContent = "Time Remaining : " + timeConversion(timeRemaining);
     //Sets timer to update every second
     timer = setInterval(function () {
         timeRemaining--;
         // If no time remaining end game
         if (timeRemaining === 0) endGame();
-        id("timer").textContent = "Time Remaining : " + timeConversion(timeRemaining);
+        getId("timer").textContent = "Time Remaining : " + timeConversion(timeRemaining);
     }, 1000)
 }
 
@@ -142,7 +150,7 @@ function generateBoard(board) {
                     } else {
                         // Deselect all other tiles
                         for (let i = 0; i < 81; i++) {
-                            qsa(".tile")[i].classList.remove("selected");
+                            getQsa(".tile")[i].classList.remove("selected");
                         }
                         // Add selection and update variable
                         tile.classList.add("selected");
@@ -165,7 +173,7 @@ function generateBoard(board) {
             tile.classList.add("rightBorder");
         }
         // Add tile to board
-        id("board").appendChild(tile);
+        getId("board").appendChild(tile);
     }
 }
 
@@ -212,7 +220,7 @@ function updateMove() {
                 if (lives === 0) { endGame(); }
                 else {
                     //If not = 0 -> update lives text
-                    id("lives").textContent = "Lives Remaining : " + lives;
+                    getId("lives").textContent = "Lives Remaining : " + lives;
                     // Renable selecting numbers and tiles
                     disableSelect = false;
                 }
@@ -231,7 +239,7 @@ function updateMove() {
 }
 
 function checkDone() {
-    let tiles = qsa(".tile");
+    let tiles = getQsa(".tile");
     for (let i = 0; i < tiles.length; i++) {
         if (tiles[i].textContent === "") return false;
     }
@@ -245,13 +253,13 @@ function endGame() {
 
     // Display win or loss message
     if (lives === 0 || timeRemaining === 0) {
-        id("loseModal").style.display = "block";
+        getId("loseModal").style.display = "block";
         loseSound.play();
         setTimeout(function () {
             location.reload();
         }, 5000)
     } else {
-        id("winModal").style.display = "block";
+        getId("winModal").style.display = "block";
         winSound.play();
         setTimeout(function () {
             location.reload();
@@ -262,10 +270,10 @@ function endGame() {
 function checkCorrect(tile) {
     // Set solution based on difficulty selection
     let solution;
-    if (id("diff-1").checked) { 
+    if (getId("diff-1").checked) { 
         solution = easy[easyTable][1]; 
     }
-    else if (id("diff-2").checked) { 
+    else if (getId("diff-2").checked) { 
         solution = medium[mediumTable][1];
     }
     else { 
@@ -282,7 +290,7 @@ function checkCorrect(tile) {
 
 function clearPrevious() {
     // Clear the tiles
-    let tiles = qsa(".tile");
+    let tiles = getQsa(".tile");
     for (let i = 0; i < tiles.length; i++) {
         tiles[i].remove();
     }
@@ -291,8 +299,8 @@ function clearPrevious() {
     if (timer) clearTimeout(timer);
 
     // Deselect any numbers
-    for (let i = 0; i < id("number-container").children.length; i++) {
-        id("number-container").children[i].classList.remove("selected");
+    for (let i = 0; i < getId("number-container").children.length; i++) {
+        getId("number-container").children[i].classList.remove("selected");
     }
 
     // Clear selected Variables
@@ -301,14 +309,14 @@ function clearPrevious() {
 }
 
 // Helper Function
-function id(id) {
+function getId(id) {
     return document.getElementById(id);
 }
 
-function qs(selector) {
+function getQs(selector) {
     return document.querySelector(selector);
 }
 
-function qsa(selector) {
+function getQsa(selector) {
     return document.querySelectorAll(selector);
 }
